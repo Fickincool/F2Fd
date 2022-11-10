@@ -1,0 +1,6 @@
+setup.py
+F2Fd.egg-info/PKG-INFO
+F2Fd.egg-info/SOURCES.txt
+F2Fd.egg-info/dependency_links.txt
+F2Fd.egg-info/not-zip-safe
+F2Fd.egg-info/top_level.txt

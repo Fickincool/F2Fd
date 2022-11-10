@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: F2Fd
+Version: 0.0
+Summary: CryoET self supervised denoising based on Fourier perturbations
+Home-page: https://
+Author: Jerónimo Carvajal Maldonado
+Author-email: jeronimo.carvajal@tum.de
+License: MIT

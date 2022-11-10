@@ -1,0 +1,26 @@
+# This file may be used to create an environment using:                                                                                                 
+# $ conda create --name <env> --file <this file>                                                                                                        
+# platform: linux-64   
+
+# I decided not to add any versions to allow easier installation using conda...
+# This might be a bad idea, but otherwise conda cannot solve the environment in a reasonable time
+pandas
+pytorch-lightning
+scipy
+jupyterlab 
+matplotlib
+seaborn
+h5py
+simpleitk
+mrcfile
+scikit-learn
+scikit-image
+tqdm
+torchinfo
+torchio
+torchmetrics
+
+###### Add these packages after intallation
+# pytorch-msssim=0.2.1=pypi_0
+# tomopy
+
