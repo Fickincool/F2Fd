@@ -59,7 +59,7 @@ class singleCET_dataset(Dataset):
         if gt_tomo_path is not None:
             self.gt_data = torch.tensor(read_array(gt_tomo_path))
             # the shrec data ground truth values are inverted
-            if "shrec2021" in self.gt_tomo_path:
+            if "shrec2021" in self.gt_tomo_path or "grandmodel" in self.gt_tomo_path:
                 self.gt_data = -1*self.gt_data
                 self.gt_data = self.gt_data - self.gt_data.min()
             if clip:

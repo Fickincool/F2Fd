@@ -41,11 +41,10 @@ Finally, install F2Fd package:
 
 ## 3. Example of usage
 
-Denoise sample data from the [SHREC 2021 Challenge](https://www.shrec.net/cryo-et/) using our sample script in three steps:
+Denoise sample data from the [SHREC 2021 Challenge](https://www.shrec.net/cryo-et/) using our [sample script](https://github.com/Fickincool/F2Fd/blob/main/3D_denoisingUnet/run_training_experiment.py). You need to define the following:
 
-1. Define logging directories and input tomograms: just specify where the directories for your experiment arguments, your model logs and data directories will be stored.
-2. Define training arguments for the dataloader and the network (see description below)
-3. Train the network
+1. Logging directories and input tomograms: just specify where the directories for your experiment arguments, your model logs and data directories will be stored.
+2. Training arguments for the dataloader and the network (see description below)
 
 
 ### Description of most important script arguments
