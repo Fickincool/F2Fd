@@ -19,8 +19,7 @@ tqdm
 torchinfo
 torchio
 torchmetrics
+tomopy
 
-###### Add these packages after intallation
-# pytorch-msssim=0.2.1=pypi_0
-# tomopy
-
+###### Add these manually packages after intallation
+# pytorch-msssim=0.2.1=pypi_0 # use pip

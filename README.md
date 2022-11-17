@@ -5,7 +5,8 @@ Fourier Perturbations for Denoising Cryo-Electron Tomograms and Comparison to Es
   - [1.1. Architecture](#11-architecture)
 - [2. Installation](#2-installation)
 - [3. Example of usage](#3-example-of-usage)
-  - [Description of most important script arguments](#description-of-most-important-script-arguments)
+  - [3.1. Description of most important script arguments](#31-description-of-most-important-script-arguments)
+  - [3.2. Caveats](#32-caveats)
 - [4. Fourier space sampling](#4-fourier-space-sampling)
 - [5. Membrane segmentation downstream task](#5-membrane-segmentation-downstream-task)
 - [6. Results summary](#6-results-summary)
@@ -34,21 +35,45 @@ Afterwards, create the `F2Fd` environment and install requirements:
 - `conda create -n F2Fd python=3.9 pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia`
 - `conda activate F2Fd`
 - `conda install --file requirements_F2FdDenoising.txt`
+- `pip install pytorch-msssim`
 
-Finally, install F2Fd package:
+Finally, install F2Fd package. From **this folder** run:
 
 - `pip install --editable ./F2Fd/.`
 
 ## 3. Example of usage
 
-Denoise sample data from the [SHREC 2021 Challenge](https://www.shrec.net/cryo-et/) using our [sample script](https://github.com/Fickincool/F2Fd/blob/main/3D_denoisingUnet/run_training_experiment.py). You need to define the following:
+Denoise sample data from the [SHREC 2021 Challenge](https://www.shrec.net/cryo-et/) using our [sample script](https://github.com/Fickincool/F2Fd/blob/main/3D_denoisingUnet/run_training_experiment.py). Before running it, you need to define the following:
 
-1. Logging directories and input tomograms: just specify where the directories for your experiment arguments, your model logs and data directories will be stored.
+1. Logging directories and input tomograms: just specify where the directories for your experiment arguments, your model logs and data directories will be stored. **The default folder for logging is `$HOME/example_F2FDenoising/`**
 2. Training arguments for the dataloader and the network (see description below)
 
+After setting up your environment, directories and parameters, its time to train the network:
+- `conda activate F2Fd`
+- `python 3D_denoisingUnet/run_training_experiment.py`
 
-### Description of most important script arguments
-ToDo
+When training is finished, the sample script will also predict the denoised version of the input, with some additional information. By default, this files will be located on `$HOME/example_F2FDenoising/` and it includes the .mrc file prediction, a PNG file with the comparison of the central slices of the input and the denoised vesions as well as the trained model, under the `checkpoints/` folder.
+
+
+### 3.1. Description of most important script arguments
+
+- Epochs: Maximum number of epochs
+- p: pointwise mask probability (for the inversion mask) 
+- Vmask_pct: volumetric mask probability
+- dropout_p: dropout probability
+- volumetric_scale_factor: number of pixels for each side of the volumetric mask. All the dimensions of the tomogram need to be divisible by this number
+- total_samples: total number of Fourier samples to create
+- total_samples_prediction: number of Fourier samples to use at prediction time (not used if `make_fourierSamples_beforeTraining=True`)
+- n_bernoulli_samples: number of samples used in a batch (the "Bernoulli" part is a misnomer, needs to be changed).
+- n_bernoulli_samples_prediction: number of samples used in a batch for prediction
+- subtomo_length: size of the patches
+
+### 3.2. Caveats
+
+- The current sample script takes ~20 hours to run, we need to reduce this time. TODO: run the script on a smaller tomogram or a subset of the one we are currently using.
+- Currently all Fourier samples are loaded into RAM, which might be a strong limitation on the number of Fourier samples we might have available for the pool
+- We understand that more Fourier samples yields better results, but we still need to make a more thorough analysis to have a better idea of this
+- Logging probably should be a little more verbose, e.g., maybe we need to implement checkpointing.
 
 ## 4. Fourier space sampling
 

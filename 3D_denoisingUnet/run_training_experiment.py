@@ -6,8 +6,7 @@ from F2Fd.misc import download_SHREC
 
 #################### 1. Define log directories and input tomograms
 
-# PARENT_PATH = os.path.join(os.environ['HOME'], "example_F2FDenoising/")
-PARENT_PATH = os.path.join('/home/ubuntu/Thesis/', "example_F2FDenoising/") #TODO
+PARENT_PATH = os.path.join(os.environ['HOME'], "example_F2FDenoising/")
 
 # save experiment arguments for this run, for future reproducibility
 experiment_logdir = os.path.join(PARENT_PATH, "experiment_args")
@@ -62,11 +61,11 @@ default_args = {
     "deconv_kwargs": {}, # deconvolution kwargs. Empty dict means no deconvolution. Otherwise,
     # a dictionary with all necessary arguments needs to be defined for the convolution. 
     # See deconv_kwargs in 2. Define experiment arguments (below) to see what needs to be included
-    "use_deconv_as_target": None,
-    "comment": None,
-    "bernoulliMask_prob": 1,
-    "input_as_target": None,
-    "path_to_fourier_samples": None,
+    "use_deconv_as_target": None, # deprecated
+    "comment": None, # deprecated
+    "bernoulliMask_prob": 1, # deprecated
+    "input_as_target": None, # deprecated
+    "path_to_fourier_samples": None, # deprecated
     "predict_N_times":100, # number of times to make predictions and then avarge to get final denoised versions
     "clip":True, # wether to clip the inputs or not
 }
