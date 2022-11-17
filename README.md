@@ -57,16 +57,17 @@ When training is finished, the sample script will also predict the denoised vers
 
 ### 3.1. Description of most important script arguments
 
-- **Epochs**: Maximum number of epochs
-- **p**: pointwise mask probability (for the inversion mask) 
-- **Vmask_pct**: volumetric mask probability
-- **dropout_p**: dropout probability
-- **volumetric_scale_factor**: number of pixels for each side of the volumetric mask. All the dimensions of the tomogram need to be divisible by this number
-- **total_samples**: total number of Fourier samples to create
+- **epochs**: Maximum number of epochs.
+- **p**: pointwise mask probability (for the inversion mask) .
+- **Vmask_pct**: volumetric mask probability.
+- **dropout_p**: dropout probability.
+- **volumetric_scale_factor**: number of pixels for each side of the volumetric mask. All the dimensions of the tomogram need to be divisible by this number.
+- **total_samples**: total number of Fourier samples to create.
 - **total_samples_prediction**: number of Fourier samples to use at prediction time (not used if `make_fourierSamples_beforeTraining=True`)
 - **n_bernoulli_samples**: number of samples used in a batch (the "Bernoulli" part is a misnomer, needs to be changed).
 - **n_bernoulli_samples_prediction**: number of samples used in a batch for prediction
-- **subtomo_length**: size of the patches
+- **batch_size**: size of the batch, each batch uses `n_bernoulli_samples`.
+- **subtomo_length**: size of the patches.
 
 ### 3.2. Caveats
 
