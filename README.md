@@ -8,8 +8,7 @@ Fourier Perturbations for Denoising Cryo-Electron Tomograms and Comparison to Es
   - [3.1. Description of most important script arguments](#31-description-of-most-important-script-arguments)
   - [3.2. Caveats](#32-caveats)
 - [4. Fourier space sampling](#4-fourier-space-sampling)
-- [5. Membrane segmentation downstream task](#5-membrane-segmentation-downstream-task)
-- [6. Results summary](#6-results-summary)
+- [5. Results summary](#5-results-summary)
 
 ## 1. Abstract
 
@@ -90,8 +89,15 @@ $$z = \frac{1}{K \cdot T} \sum_k \sum_t f_{\theta^*_t}(p_k)$$
 
 and we repeat this process for each patch of the image. Taking the average of the denoised patches whenever there is overlap between them.
 
-## 5. Membrane segmentation downstream task
+<!-- ## 5. Membrane segmentation downstream task -->
 
+## 5. Results summary
 
+Benchmarking of denoising methods (deconvolution using [Wiener-like filter](https://www.nature.com/articles/s41592-019-0580-y?ref=https://githubhelp.com#Sec2), [Noise-to-Void](https://github.com/juglab/n2v) (N2V), [S2Sd](https://github.com/scut-mingqinchen/Self2Self), [IsoNet](https://github.com/IsoNet-cryoET/IsoNet), F2Fd (ours), [Cryo-CARE](https://github.com/juglab/cryoCARE_pip) ) on all 3 datasets. We depict the denoising performance on a 2D slice of the 3D volumes, with Peak Signal-to-Noise ratios (PSNR) and Structural Similarity indices (SSIM), both evaluated on the entire 3D volume. As there is no ground truth available for Dataset 3, we consider Cryo-CARE's prediction as a "pseudo ground truth".
 
-## 6. Results summary
+![result_matrix](images/ISBI_figure3_v1.png)
+
+On all three datasets, F2Fd is among the best methods regarding SSIM (0.11, 0.10, 0.65 for Datasets 1,2,3) and PSNR (12.13, 6.98, 17.97). Compared to that, N2V and S2Sd, where real space noise is used, achieve worse metrics. This is also confirmed by the qualitative analysis: N2V doesn't seem to have a large effect, while S2Sd increases the contrast, but also loses some information, which can be observed for the disappearing membrane proteins in Dataset 3. 
+
+While Wiener-like deconvolution strongly increases the contrast and achieves high SSIM and PSNR values, it also _washes out_ several features in the tomograms. IsoNet's denoising on the synthetic Dataset 2 seems very promising, but it does not denoise the experimental Dataset 3 very well and also _washes out_ some densities. Notably, as part of the typical IsoNet workflow, tomograms were already deconvolved with the Wiener-like filter before prediction. 
+Compared to these methods, F2Fd increases the contrast of the tomograms in all datasets, and also preserves the features present in the tomograms, like the membrane proteins in Dataset 3.
